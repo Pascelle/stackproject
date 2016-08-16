@@ -81,8 +81,8 @@ var getFrequentAnswerers = function(answerers) {
 		$('.search-results').html(searchResults);
 		//$.each is a higher order function. It takes an array and a function as an argument.
 		//The function is executed once for each item in the array.
-		$.each(result.items, function(i, item) {
-			var question = showQuestion(item);
+		$.each(result.items, function(i, item) {  //function(index no. of item, actual item)  ex: function(0, object)
+			var question = showAnswerers(item);
 			$('.results').append(question);
 		});
 	})
@@ -112,7 +112,7 @@ var showError = function(error){
 
 // this function takes the question object returned by the StackOverflow request
 // and returns new result to be appended to DOM
-var showQuestion = function(question) {
+var showQuestion = function(question) { //question is a parameter that represents each individual result
 	
 	// clone our result template code
 	var result = $('.templates .question').clone();
@@ -143,38 +143,29 @@ var showQuestion = function(question) {
 	return result;
 };
 
-// this function takes the frequent answerers object returned by the StackOverflow request
-// and returns new result to be appended to DOM
+// this function takes each item within the object that was returned by the StackOverflow request
+// and returns a new result that is then appended to DOM
 var showAnswerers = function(answerer) {
 	
-	// clone our result template code
+	// clone our result template code so data can be put into it below
 	var result = $('.templates .answerer').clone();
 	
 	//Set the display name in result
-
+	var displayAnsName = result.find('.answerer-name');
+	displayAnsName.text(answerer.user.display_name);
 
 	// Set the profile link in result
-	var profileElem = result.find('.answerer-text a');
-	questionElem.attr('href', question.link);
-	questionElem.text(question.title);
+	var profileLink = result.find('.profile-link a');
+	profileLink.attr('href', answerer.user.link); // getting or setting the value of an attr for the first element in the set of elements .attr(attributeName, value)
+	profileLink.text(answerer.user.link);
 
-	// set the date asked property in result
-	var asked = result.find('.asked-date');
-	var date = new Date(1000*question.creation_date);
-	asked.text(date.toString());
+	// set reputation in result
+	var reputation = result.find('.reputation');
+	reputation.text(answerer.user.reputation);
 
-	// set the .viewed for question property in result
-	var viewed = result.find('.viewed');
-	viewed.text(question.view_count);
-
-	// set some properties related to asker
-	var asker = result.find('.asker');
-	asker.html('<p>Name: <a target="_blank" '+
-		'href=http://stackoverflow.com/users/' + question.owner.user_id + ' >' +  
-		question.owner.display_name +
-		'</a></p>' +
-		'<p>Reputation: ' + question.owner.reputation + '</p>'
-	);
+	// set the accept rate in result
+	var acceptRate = result.find('.acceptRate');
+	acceptRate.text(answerer.user.accept_rate);
 
 	return result;
 };
