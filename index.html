@@ -1,67 +1,57 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Stack Overflow AJAX Demo</title>
-	<link rel="stylesheet" href="css/main.css">
+	<title>United States Demographics Guessing Game </title>
+	<!-- gabe: good practice to close the html tags though it's not required -->
+    <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" type="text/css" href="styles/style.css"/>
+	<meta charset="UTF-8"/>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/Questions.js"></script>
+	<script type="text/javascript" src="js/Application.js"></script>
 </head>
 <body>
-	<div class="container">
-		<div class="intro">
-			<div class="left stack-image"></div>
-			<div class="explanation">
-				<h1>StackOverflow Reputation Builder</h1>
-				<p>This app lets you search by topic for unanswered questions on Stack Overflow to help you build your reputation.  Find unanswered questions for a topic you know about, write quality answers, and watch your reputation go up.</p>
-				<p>Sometimes, you also need some inspiration. This page also lets you search for the top answerers for a tag. If you want to rise to the top ranks for a topic, see how many reputation points you'll need to aim for!</p>
+
+
+	<section id="intro">
+		<div class="frontpage">
+			<h1>United States Demographics Guessing Game</h1>
+			<div class="startGame">
+				<a id="introMap" href="#"><img src="images/map.jpg" alt="US Map"/></a>
 			</div>
+		
 		</div>
-		<hr>
-		<div class="stack">	
-			<h3>Get Unanswered Questions</h3>
-			<p>Find unanswered questions by tag. For multiple tags, use a semi-colon to separate.</p>
-			<form class="unanswered-getter">
-				<input type="text" placeholder='e.g., "HTML" or "HTML;CSS"' name="tags" size="30" autofocus required>
-				<input type="submit" value="Submit">
+	</section>
+
+	<section id="play_area">
+
+		<div id="header">
+			<h1> United States Demographics Guessing Game </h1>
+			<h2> Question <span id="cur_quest_num"> </span> out of 5 </h2>
+		</div>
+
+		<div id="question_area">
+			<form id="quesForm" name="quesForm" method="post" onsubmit= "return false">
+			<div id="questions"></div>
+			<div id="return_obj"><p></p></div>
+			<button class="btn" id="subbtn">Submit</button>
 			</form>
-			<h3>View the Top Answerers for a Tag</h3>
-			<form class="frequent-answerer-getter">
-				<input type="text" placeholder="e.g., jQuery" name="answerers" size="30"  required>
-				<input type="submit" value="Submit">
-			</form>
 		</div>
-		<div class="results-container">
-			<div class="search-results"></div>
-			<div class="results"></div>
+
+		<div id="answer_area">
+			<p id="answer"></p>
+			<p id="facts"></p>
+			<button class="btn" id="nextbtn">Next Question</button>
 		</div>
-	</div>
-	<div class="templates hidden">
-		<dl class="result question">
-			<dt>Question</dt>
-				<dd class="question-text"><a href="" target="_blank"></a></dd>
-			<dt>Asked</dt>
-				<dd class="asked-date"></dd>
-			<dt>Viewed</dt>
-				<dd class="viewed"></dd>
-			<dt>Asker</dt>
-				<dd class="asker"></dd>
-		</dl>
-		<dl class="result answerer">
-			<dt>Display Name</dt>
-				<dd class="answerer-name"></a></dd>
-			<dt>Profile Link</dt>
-				<dd class="profile-link"><a href="" target="_blank"></a></dd>
-			<dt>Reputation</dt>
-				<dd class="reputation"></dd>
-			<dt>Accept Rate</dt>
-				<dd class="acceptRate"></dd>
-			<dt>Number of Questions Answered</dt>
-				<dd class="asker"></dd>
-		</dl>
-		<div class="error">
-			<p>Uh-oh! Something went wrong with your request. Here's what we know:</p>
-		</div>
-	</div>
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script src="js/app.js"></script>
+	</section>
+
+	<section id="done">
+		<p id="score">You answered <span id=numQuesCorrect> 0 </span> questions correctly!</p>
+		<button class="btn" id="rsbtn">Play Again!</button>
+	</section>
+
+
+   
 </body>
 </html>
